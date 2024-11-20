@@ -4,7 +4,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>PIMS - Evidence</title>
+	<title>PIMS - Cases</title>
 	<link rel="stylesheet" href="../css/style.css">
 	<script defer src="../js/script.js"></script>
 </head>
@@ -14,8 +14,8 @@
 		<div class="logo">PIMS</div>
 		<ul class="nav-links">
 			<li><a href="dashboard.html">Dashboard</a></li>
-			<li><a href="cases.html">Cases</a></li>
-			<li><a href="evidence.html" class="active">Evidence</a></li>
+			<li><a href="cases.html" class="active">Cases</a></li>
+			<li><a href="evidence.html">Evidence</a></li>
 			<li><a href="officers.html">Officers</a></li>
 			<li><a href="reports.html">Reports</a></li>
 			<li><a href="login.html">Logout</a></li>
@@ -23,26 +23,29 @@
 	</div>
 
 	<div class="main-content">
-		<h2>Evidence Management</h2>
+		<h2>Cases Management</h2>
 		<div class="card">
-			<button onclick="showAddEvidenceForm()">Add Evidence</button>
+			<button onclick="showAddCaseForm()">Add New Case</button>
 			<table>
 				<thead>
 					<tr>
-						<th>Evidence ID</th>
 						<th>Case ID</th>
-						<th>Type</th>
-						<th>Location</th>
+						<th>Title</th>
+						<th>Date</th>
 						<th>Status</th>
+						<th>Actions</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
-						<td>E-2024-001</td>
 						<td>C-2024-001</td>
-						<td>Weapon</td>
-						<td>Locker A-12</td>
-						<td>Secured</td>
+						<td>Robbery Investigation</td>
+						<td>2024-03-15</td>
+						<td>Active</td>
+						<td>
+							<button>View</button>
+							<button>Edit</button>
+						</td>
 					</tr>
 				</tbody>
 			</table>

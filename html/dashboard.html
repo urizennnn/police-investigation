@@ -4,34 +4,72 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dashboard - Police Investigation Management</title>
-	<link rel="stylesheet" href="../css/home.css">
-	<script defer src="../js/home.js"></script>
+	<title>PIMS - Dashboard</title>
+	<link rel="stylesheet" href="../css/style.css">
+	<script defer src="../js/script.js"></script>
 </head>
 
 <body>
-	<header class=" header">
-		<h1>Dashboard</h1>
-		<nav>
-			<a href="profile.html">Profile</a>
-			<a href="login.html">Logout</a>
-		</nav>
-	</header>
-	<main class="dashboard">
-		<section class="cases">
-			<h2>Ongoing Cases</h2>
-			<div class="case-card">
-				<h3>Case #123</h3>
-				<p>Investigator: Detective John</p>
-				<a href="case-details.html">View Details</a>
+	<div class="sidebar">
+		<div class="logo">PIMS</div>
+		<ul class="nav-links">
+			<li><a href="dashboard.html" class="active">Dashboard</a></li>
+			<li><a href="cases.html">Cases</a></li>
+			<li><a href="evidence.html">Evidence</a></li>
+			<li><a href="officers.html">Officers</a></li>
+			<li><a href="reports.html">Reports</a></li>
+			<li><a href="login.html">Logout</a></li>
+		</ul>
+	</div>
+
+	<div class="main-content">
+		<h2>Dashboard</h2>
+		<div class="dashboard-stats">
+			<div class="stat-card">
+				<div class="stat-number">45</div>
+				<div>Active Cases</div>
 			</div>
-			<div class="case-card">
-				<h3>Case #124</h3>
-				<p>Investigator: Detective Doe</p>
-				<a href="case-details.html">View Details</a>
+			<div class="stat-card">
+				<div class="stat-number">12</div>
+				<div>Officers on Duty</div>
 			</div>
-		</section>
-	</main>
+			<div class="stat-card">
+				<div class="stat-number">89</div>
+				<div>Evidence Items</div>
+			</div>
+			<div class="stat-card">
+				<div class="stat-number">23</div>
+				<div>Reports Pending</div>
+			</div>
+		</div>
+		<div class="card">
+			<h3>Recent Cases</h3>
+			<table>
+				<thead>
+					<tr>
+						<th>Case ID</th>
+						<th>Title</th>
+						<th>Officer</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>C-2024-001</td>
+						<td>Robbery Investigation</td>
+						<td>Off. Johnson</td>
+						<td>Active</td>
+					</tr>
+					<tr>
+						<td>C-2024-002</td>
+						<td>Missing Person</td>
+						<td>Off. Smith</td>
+						<td>Pending</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
 </body>
 
 </html>
