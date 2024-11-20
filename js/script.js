@@ -223,6 +223,115 @@ const modalStyles = `
     }
 `;
 
+function showViewCaseModal(caseId) {
+  const caseData = getCaseData(caseId);
+
+  const modalHtml = `
+        <div class="modal">
+            <div class="modal-content">
+                <h3>Case Details</h3>
+                <div class="case-details">
+                    <p><strong>Case ID:</strong> ${caseData.id}</p>
+                    <p><strong>Title:</strong> ${caseData.title}</p>
+                    <p><strong>Date:</strong> ${caseData.date}</p>
+                    <p><strong>Status:</strong> ${caseData.status}</p>
+                    <p><strong>Description:</strong> ${caseData.description}</p>
+                    <p><strong>Assigned Officer:</strong> ${caseData.officer}</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+  const modalDiv = document.createElement("div");
+  modalDiv.innerHTML = modalHtml;
+  document.body.appendChild(modalDiv);
+}
+
+function showEditCaseForm(caseId) {
+  const caseData = getCaseData(caseId);
+
+  const modalHtml = `
+        <div class="modal">
+            <div class="modal-content">
+                <h3>Edit Case</h3>
+                <form id="editCaseForm">
+                    <input type="text" placeholder="Case Title" value="${caseData.title}" required>
+                    <input type="date" placeholder="Case Date" value="${caseData.date}" required>
+                    <select required>
+                        <option value="">Select Status</option>
+                        <option value="active" ${caseData.status === "active" ? "selected" : ""}>Active</option>
+                        <option value="pending" ${caseData.status === "pending" ? "selected" : ""}>Pending</option>
+                        <option value="closed" ${caseData.status === "closed" ? "selected" : ""}>Closed</option>
+                    </select>
+                    <textarea placeholder="Case Description" required>${caseData.description}</textarea>
+                    <div class="form-actions">
+                        <button type="submit">Save Changes</button>
+                        <button type="button" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+  const modalDiv = document.createElement("div");
+  modalDiv.innerHTML = modalHtml;
+  document.body.appendChild(modalDiv);
+
+  document
+    .getElementById("editCaseForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      updateCaseData(caseId);
+      closeModal();
+      refreshCasesTable();
+    });
+}
+
+// Helper functions
+function getCaseData(caseId) {
+  // Fetch case data from your data source
+  // For now, we'll use a simple object
+  return {
+    id: caseId,
+    title: "Robbery Investigation",
+    date: "2024-03-15",
+    status: "active",
+    description: "Investigating a robbery that occurred at the downtown bank.",
+    officer: "Officer Johnson",
+  };
+}
+
+function updateCaseData(caseId) {
+  // Update case data in your data source
+  // For now, we'll just log the updated data to the console
+  const updatedTitle = document.querySelector(
+    '#editCaseForm input[type="text"]',
+  ).value;
+  const updatedDate = document.querySelector(
+    '#editCaseForm input[type="date"]',
+  ).value;
+  const updatedStatus = document.querySelector("#editCaseForm select").value;
+  const updatedDescription = document.querySelector(
+    "#editCaseForm textarea",
+  ).value;
+
+  console.log("Updated Case Data:", {
+    id: caseId,
+    title: updatedTitle,
+    date: updatedDate,
+    status: updatedStatus,
+    description: updatedDescription,
+  });
+}
+
+function refreshCasesTable() {
+  // Refresh the cases table with updated data
+  // You'll need to implement this function to update the UI
+  console.log("Refreshing cases table...");
+}
 const styleSheet = document.createElement("style");
 styleSheet.type = "text/css";
 styleSheet.innerText = modalStyles;
