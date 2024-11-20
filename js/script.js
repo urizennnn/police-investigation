@@ -326,7 +326,125 @@ function updateCaseData(caseId) {
     description: updatedDescription,
   });
 }
+function showViewOfficerModal(badgeNumber) {
+  const officerData = getOfficerData(badgeNumber);
 
+  const modalHtml = `
+        <div class="modal">
+            <div class="modal-content">
+                <h3>Officer Details</h3>
+                <div class="officer-details">
+                    <p><strong>Badge Number:</strong> ${officerData.badgeNumber}</p>
+                    <p><strong>Name:</strong> ${officerData.name}</p>
+                    <p><strong>Rank:</strong> ${officerData.rank}</p>
+                    <p><strong>Status:</strong> ${officerData.status}</p>
+                    <p><strong>Email:</strong> ${officerData.email}</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" onclick="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    `;
+
+  const modalDiv = document.createElement("div");
+  modalDiv.innerHTML = modalHtml;
+  document.body.appendChild(modalDiv);
+}
+
+function showEditOfficerForm(badgeNumber) {
+  const officerData = getOfficerData(badgeNumber);
+
+  const modalHtml = `
+        <div class="modal">
+            <div class="modal-content">
+                <h3>Edit Officer</h3>
+                <form id="editOfficerForm">
+                    <input type="text" placeholder="Badge Number" value="${officerData.badgeNumber}" required>
+                    <input type="text" placeholder="Full Name" value="${officerData.name}" required>
+                    <select required>
+                        <option value="">Select Rank</option>
+                        <option value="officer" ${officerData.rank === "officer" ? "selected" : ""}>Officer</option>
+                        <option value="detective" ${officerData.rank === "detective" ? "selected" : ""}>Detective</option>
+                        <option value="sergeant" ${officerData.rank === "sergeant" ? "selected" : ""}>Sergeant</option>
+                        <option value="lieutenant" ${officerData.rank === "lieutenant" ? "selected" : ""}>Lieutenant</option>
+                    </select>
+                    <select required>
+                        <option value="">Select Status</option>
+                        <option value="active" ${officerData.status === "active" ? "selected" : ""}>On Duty</option>
+                        <option value="inactive" ${officerData.status === "inactive" ? "selected" : ""}>Off Duty</option>
+                        <option value="leave" ${officerData.status === "leave" ? "selected" : ""}>On Leave</option>
+                    </select>
+                    <input type="email" placeholder="Email" value="${officerData.email}" required>
+                    <div class="form-actions">
+                        <button type="submit">Save Changes</button>
+                        <button type="button" onclick="closeModal()">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+
+  const modalDiv = document.createElement("div");
+  modalDiv.innerHTML = modalHtml;
+  document.body.appendChild(modalDiv);
+
+  document
+    .getElementById("editOfficerForm")
+    .addEventListener("submit", function (e) {
+      e.preventDefault();
+      updateOfficerData(officerData.badgeNumber);
+      closeModal();
+      refreshOfficersTable();
+    });
+}
+
+// Helper functions
+function getOfficerData(badgeNumber) {
+  // Fetch officer data from your data source
+  // For now, we'll use a simple object
+  return {
+    badgeNumber: badgeNumber,
+    name: "John Smith",
+    rank: "Detective",
+    status: "active",
+    email: "john.smith@police.com",
+  };
+}
+
+function updateOfficerData(badgeNumber) {
+  // Update officer data in your data source
+  // For now, we'll just log the updated data to the console
+  const updatedBadgeNumber = document.querySelector(
+    '#editOfficerForm input[type="text"]',
+  ).value;
+  const updatedName = document.querySelector(
+    '#editOfficerForm input[type="text"]:nth-of-type(2)',
+  ).value;
+  const updatedRank = document.querySelector(
+    "#editOfficerForm select:nth-of-type(1)",
+  ).value;
+  const updatedStatus = document.querySelector(
+    "#editOfficerForm select:nth-of-type(2)",
+  ).value;
+  const updatedEmail = document.querySelector(
+    '#editOfficerForm input[type="email"]',
+  ).value;
+
+  console.log("Updated Officer Data:", {
+    badgeNumber: updatedBadgeNumber,
+    name: updatedName,
+    rank: updatedRank,
+    status: updatedStatus,
+    email: updatedEmail,
+  });
+}
+
+function refreshOfficersTable() {
+  // Refresh the officers table with updated data
+  // You'll need to implement this function to update the UI
+  console.log("Refreshing officers table...");
+}
 function refreshCasesTable() {
   // Refresh the cases table with updated data
   // You'll need to implement this function to update the UI
