@@ -1,16 +1,72 @@
 console.log("Hi");
-function login(event) {
-  event.preventDefault();
-  const badgeNumber = document.querySelector('input[type="text"]').value;
-  const password = document.querySelector('input[type="password"]').value;
+const URL = [`http://localhost:3000/api`];
 
-  if (badgeNumber && password) {
-    window.location.href = "dashboard.html";
-  } else {
-    alert("Please enter both Badge Number and Password");
-  }
-  return false;
-}
+document
+  .querySelector("#login-form")
+  .addEventListener("submit", async function login(event) {
+    event.preventDefault();
+    const username = document.querySelector('input[type="text"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    if (username && password) {
+      try {
+        const response = await fetch(`${URL[0]}/admin/login`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+        if (!response.ok) {
+          if (response.status === 401) {
+            alert("Invalid username or password");
+          }
+          alert("Login failed. Please try again.");
+        } else {
+          window.location.href = "dashboard.html";
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while logging in.");
+      }
+    } else {
+      alert("Please enter both Badge Number and Password");
+    }
+    return false;
+  });
+
+document
+  .getElementById("signup-form")
+  .addEventListener("submit", async (event) => {
+    event.preventDefault();
+    console.log("Signing up");
+
+    const username = document.querySelector('input[type="text"]').value;
+    const password = document.querySelector('input[type="password"]').value;
+
+    if (username && password) {
+      try {
+        const response = await fetch(`${URL}/admin/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, password }),
+        });
+
+        if (response.ok) {
+          window.location.href = "login.html";
+        } else {
+          alert("Signup failed. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("An error occurred while signing up.");
+      }
+    } else {
+      alert("Please enter both Badge Number and Password");
+    }
+  });
 
 function showAddCaseForm() {
   const formHtml = `
