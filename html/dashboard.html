@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>PIMS - Dashboard</title>
 	<link rel="stylesheet" href="../css/style.css">
-	<script defer src="../js/script.js"></script>
+	<script defer src="../js/dashboard.js"></script>
 </head>
 
 <body>
@@ -26,19 +26,19 @@
 		<h2>Dashboard</h2>
 		<div class="dashboard-stats">
 			<div class="stat-card">
-				<div class="stat-number">45</div>
+				<div id="openCasesCount" class="stat-number">0</div>
 				<div>Active Cases</div>
 			</div>
 			<div class="stat-card">
-				<div class="stat-number">12</div>
+				<div id="onDutyOfficersCount" class="stat-number">0</div>
 				<div>Officers on Duty</div>
 			</div>
 			<div class="stat-card">
-				<div class="stat-number">89</div>
+				<div id="totalEvidenceCount" class="stat-number">0</div>
 				<div>Evidence Items</div>
 			</div>
 			<div class="stat-card">
-				<div class="stat-number">23</div>
+				<div id="pendingReportsCount" class="stat-number">0</div>
 				<div>Reports Pending</div>
 			</div>
 		</div>
@@ -53,18 +53,9 @@
 						<th>Status</th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody id="recentCasesTable">
 					<tr>
-						<td>C-2024-001</td>
-						<td>Robbery Investigation</td>
-						<td>Off. Johnson</td>
-						<td>Active</td>
-					</tr>
-					<tr>
-						<td>C-2024-002</td>
-						<td>Missing Person</td>
-						<td>Off. Smith</td>
-						<td>Pending</td>
+						<td colspan="4">Loading recent cases...</td>
 					</tr>
 				</tbody>
 			</table>
